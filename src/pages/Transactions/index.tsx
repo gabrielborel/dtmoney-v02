@@ -1,6 +1,7 @@
 import { Header } from '../../components/Header';
 import { Summary } from '../../components/Summary';
-import { useTransactions } from '../../contexts/TransactionsContext';
+import { useTransactions } from '../../hooks/useTransactions';
+import { dateFormatter, priceFormatter } from '../../utils/formatter';
 import { SearchForm } from './components/SearchForm';
 import { PriceHighlight, TransactionsContainer, TransactionsTable } from './styles';
 
@@ -22,10 +23,13 @@ export const Transactions = () => {
               <tr key={transaction.id}>
                 <td>{transaction.description}</td>
                 <td>
-                  <PriceHighlight variant={transaction.type}>{transaction.value}</PriceHighlight>
+                  <PriceHighlight variant={transaction.type}>
+                    {transaction.type === 'outcome' && '- '}
+                    {priceFormatter.format(transaction.value)}
+                  </PriceHighlight>
                 </td>
                 <td>{transaction.category}</td>
-                <td>{transaction.createdAt}</td>
+                <td>{dateFormatter.format(new Date(transaction.createdAt))}</td>
               </tr>
             ))}
           </tbody>
