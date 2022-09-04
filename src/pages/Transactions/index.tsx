@@ -1,5 +1,6 @@
 import { Header } from '../../components/Header';
 import { Summary } from '../../components/Summary';
+import { PriceHighlight, TransactionsContainer, TransactionsTable } from './styles';
 
 export const Transactions = () => {
   return (
@@ -7,6 +8,38 @@ export const Transactions = () => {
       <Header />
 
       <Summary />
+
+      <TransactionsContainer>
+        <TransactionsTable>
+          <tbody>
+            <tr>
+              <td>Desenvolvimento de Website</td>
+              <td>
+                <PriceHighlight variant='income'>R$ 12.000,00</PriceHighlight>
+              </td>
+              <td>Venda</td>
+              <td>13/04/2022</td>
+            </tr>
+            <tr>
+              <td>Desenvolvimento de Website</td>
+              <td>
+                <PriceHighlight variant='outcome'>- R$ 12.000,00</PriceHighlight>
+              </td>
+              <td>Venda</td>
+              <td>13/04/2022</td>
+            </tr>
+
+            <tr>
+              <td>Desenvolvimento de Website</td>
+              <td>
+                <PriceHighlight variant='income'>R$ 12.000,00</PriceHighlight>
+              </td>
+              <td>Venda</td>
+              <td>13/04/2022</td>
+            </tr>
+          </tbody>
+        </TransactionsTable>
+      </TransactionsContainer>
     </div>
   );
 };
