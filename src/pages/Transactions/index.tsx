@@ -15,8 +15,9 @@ export const Transactions = () => {
   return (
     <div>
       <Header />
+
       <Summary />
-      asdasdasd
+
       <TransactionsContainer>
         <SearchForm />
 
