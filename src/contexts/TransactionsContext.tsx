@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 
 interface ITransaction {
   id: number;
@@ -19,7 +19,9 @@ interface TransactionsProviderProps {
   children: ReactNode;
 }
 
-export const TransactionsProvider = ({ children }: TransactionsProviderProps) => {
+export const TransactionsProvider = ({
+  children,
+}: TransactionsProviderProps) => {
   const [transactions, setTransactions] = useState<ITransaction[]>([]);
 
   const loadTransactions = async () => {
@@ -33,6 +35,8 @@ export const TransactionsProvider = ({ children }: TransactionsProviderProps) =>
   }, []);
 
   return (
-    <TransactionsContext.Provider value={{ transactions }}>{children}</TransactionsContext.Provider>
+    <TransactionsContext.Provider value={{ transactions }}>
+      {children}
+    </TransactionsContext.Provider>
   );
 };

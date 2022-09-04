@@ -1,4 +1,4 @@
-import { useTransactions } from "./useTransactions";
+import { useTransactions } from './useTransactions';
 
 export const useSummary = () => {
   const { transactions } = useTransactions();
@@ -23,4 +23,4 @@ export const useSummary = () => {
   );
 
   return summary;
-}
+};
