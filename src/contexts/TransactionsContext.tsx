@@ -13,7 +13,7 @@ interface TransactionContextType {
   transactions: ITransaction[];
 }
 
-const TransactionsContext = createContext({} as TransactionContextType);
+export const TransactionsContext = createContext({} as TransactionContextType);
 
 interface TransactionsProviderProps {
   children: ReactNode;
@@ -31,9 +31,8 @@ export const TransactionsProvider = ({ children }: TransactionsProviderProps) =>
   useEffect(() => {
     loadTransactions();
   }, []);
+
   return (
     <TransactionsContext.Provider value={{ transactions }}>{children}</TransactionsContext.Provider>
   );
 };
-
-export const useTransactions = () => useContext(TransactionsContext);
