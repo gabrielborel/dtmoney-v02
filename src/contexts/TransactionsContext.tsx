@@ -10,9 +10,12 @@ interface ITransaction {
   createdAt: string;
 }
 
+type CreateTransactionInput = Omit<ITransaction, 'id' | 'createdAt'>;
+
 interface TransactionContextType {
   transactions: ITransaction[];
   fetchTransactions: (query?: string) => Promise<void>;
+  createTransaction: (data: CreateTransactionInput) => Promise<void>;
 }
 
 export const TransactionsContext = createContext({} as TransactionContextType);
@@ -29,6 +32,8 @@ export const TransactionsProvider = ({
   const fetchTransactions = async (query?: string) => {
     const response = await api.get('/transactions', {
       params: {
+        _sort: 'createdAt',
+        _order: 'desc',
         q: query,
       },
     });
@@ -40,8 +45,19 @@ export const TransactionsProvider = ({
     fetchTransactions();
   }, []);
 
+  const createTransaction = async (data: CreateTransactionInput) => {
+    const response = await api.post('/transactions', {
+      ...data,
+      createdAt: new Date(),
+    });
+
+    setTransactions((state) => [...state, response.data]);
+  };
+
   return (
-    <TransactionsContext.Provider value={{ transactions, fetchTransactions }}>
+    <TransactionsContext.Provider
+      value={{ transactions, fetchTransactions, createTransaction }}
+    >
       {children}
     </TransactionsContext.Provider>
   );
