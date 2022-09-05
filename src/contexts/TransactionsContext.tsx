@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
+import { api } from '../libs/axios';
 
 interface ITransaction {
   id: number;
@@ -11,6 +12,7 @@ interface ITransaction {
 
 interface TransactionContextType {
   transactions: ITransaction[];
+  fetchTransactions: (query?: string) => Promise<void>;
 }
 
 export const TransactionsContext = createContext({} as TransactionContextType);
@@ -24,18 +26,22 @@ export const TransactionsProvider = ({
 }: TransactionsProviderProps) => {
   const [transactions, setTransactions] = useState<ITransaction[]>([]);
 
-  const loadTransactions = async () => {
-    const response = await fetch('http://localhost:3000/transactions');
-    const transactionsData = await response.json();
-    setTransactions(transactionsData);
+  const fetchTransactions = async (query?: string) => {
+    const response = await api.get('/transactions', {
+      params: {
+        q: query,
+      },
+    });
+
+    setTransactions(response.data);
   };
 
   useEffect(() => {
-    loadTransactions();
+    fetchTransactions();
   }, []);
 
   return (
-    <TransactionsContext.Provider value={{ transactions }}>
+    <TransactionsContext.Provider value={{ transactions, fetchTransactions }}>
       {children}
     </TransactionsContext.Provider>
   );
