@@ -10,7 +10,8 @@ import {
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
-import { useTransactions } from '../../hooks/useTransactions';
+import { useContextSelector } from 'use-context-selector';
+import { TransactionsContext } from '../../contexts/TransactionsContext';
 
 const newTransactionFormSchema = z.object({
   description: z.string(),
@@ -32,7 +33,10 @@ export const NewTransactionModal = () => {
     resolver: zodResolver(newTransactionFormSchema),
   });
 
-  const { createTransaction } = useTransactions();
+  const createTransaction = useContextSelector(
+    TransactionsContext,
+    (context) => context.createTransaction
+  );
 
   const handleCreateNewTransaction = async (
     newTransactionData: NewTransactionFormInputs
