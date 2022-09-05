@@ -15,6 +15,30 @@
       "category": "Compra",
       "value": 6000,
       "createdAt": "2022-09-04T16:10:25.569Z"
-    }
+    },
+    {
+      "description": "Teste",
+      "value": 150,
+      "category": "Venda",
+      "type": "income",
+      "createdAt": "2022-09-05T11:52:06.758Z",
+      "id": 3
+    },
+    {
+      "description": "Iogurte de Banana",
+      "value": 100,
+      "category": "Teste",
+      "type": "outcome",
+      "createdAt": "2022-09-05T12:07:41.203Z",
+      "id": 4
+    },
+    {
+      "description": "Camiseta do Neymarrj",
+      "value": 150000,
+      "category": "Roupas",
+      "type": "income",
+      "createdAt": "2022-09-05T13:00:48.740Z",
+      "id": 5
+    },
   ]
 }
